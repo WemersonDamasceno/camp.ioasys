@@ -1,16 +1,18 @@
-# calculadora_imc
+<p align="center">
+ <img width="150" src="https://user-images.githubusercontent.com/37156004/150203615-69559d5d-45c9-4481-a013-7c118661fa42.jpg" align="center" alt="GitHub Readme Stats" />
+ <h2 align="center">Calculadora IMC</h2>
+ <p align="center">Um app para calcular o seu IMC
 
-A new Flutter project.
 
-## Getting Started
+</p>
+<p align="center">Vamos lá?!
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+# Telas implementadas
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://user-images.githubusercontent.com/37156004/150203724-29e0e834-5677-4069-bdbe-5415af2bfe14.gif" width="750"/>
+  
+---
+Made with :heart: and Flutter.
