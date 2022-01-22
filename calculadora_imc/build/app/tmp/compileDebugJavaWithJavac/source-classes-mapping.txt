@@ -1,4 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-com/example/calculadora_imc/BuildConfig.java
- com.example.calculadora_imc.BuildConfig

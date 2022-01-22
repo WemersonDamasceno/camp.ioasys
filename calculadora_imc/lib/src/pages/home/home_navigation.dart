@@ -1,7 +1,6 @@
 import 'pages/home_page.dart';
-import '../todo/todo_page.dart';
-import '../widgets/app_colors.dart';
-import '../widgets/appbar_widget.dart';
+import '../todo/pages/todo_page.dart';
+import '../components/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class HomeNavigationWidget extends StatefulWidget {

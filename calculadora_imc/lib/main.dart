@@ -1,11 +1,9 @@
-import 'package:calculadora_imc/src/pages/home/home_navigation.dart';
+import 'src/pages/home/home_navigation.dart';
 
 import 'src/pages/login/login_page.dart';
 import 'src/pages/splash/splash_page.dart';
-import 'src/pages/widgets/app_colors.dart';
+import 'src/pages/components/app_colors.dart';
 import 'package:flutter/material.dart';
-
-import 'src/pages/home/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());

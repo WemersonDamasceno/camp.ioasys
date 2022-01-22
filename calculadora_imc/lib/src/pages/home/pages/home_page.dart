@@ -1,6 +1,6 @@
-import '../../widgets/appbar_widget.dart';
+import '../../components/appbar_widget.dart';
 import '../../../controller/home/home_controller.dart';
-import '../../widgets/buttom_widget.dart';
+import '../../components/buttom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
