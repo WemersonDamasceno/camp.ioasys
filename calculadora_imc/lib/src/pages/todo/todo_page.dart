@@ -1,4 +1,8 @@
-import 'package:calculadora_imc/src/pages/todo/models/todo.dart';
+import 'package:calculadora_imc/src/pages/todo/widgets/list_todo_widget.dart';
+
+import 'models/todo.dart';
+
+import 'controllers/todo_controller.dart';
 
 import '../widgets/app_colors.dart';
 import '../widgets/appbar_widget.dart';
@@ -12,15 +16,17 @@ class TodoPage extends StatefulWidget {
 }
 
 class _TodoPageState extends State<TodoPage> {
-  List<ToDo> listTodosCompletas = [];
-  List<ToDo> listTodosIncompletas = [
-    ToDo(titulo: "Beber agua", isCheck: false),
-    ToDo(titulo: "Comer", isCheck: false),
-  ];
+  late ControllerTodo _controllerTodo;
 
   @override
   void initState() {
+    _controllerTodo = ControllerTodo();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -29,30 +35,37 @@ class _TodoPageState extends State<TodoPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const AppBarWidget(titulo: "Todo List"),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Text(
-                "Mar 21, 2022",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Text(
+                  "Mar 22, 2022",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                  ),
                 ),
               ),
-            ),
-            isEmptyLists()
-                ? duasListasVazias(size)
-                : atividadesIncompletas(size)
-          ],
+              Text(
+                "${_controllerTodo.listTodosIncompletas.length} incompletas, ${_controllerTodo.listTodosCompletas.length} completas",
+              ),
+              isEmptyLists()
+                  ? duasListasVazias(size)
+                  : atividadesIncompletas(size)
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: IMCCores.primary,
-        onPressed: () {},
+        onPressed: () {
+          exibirModalBottom(size);
+        },
         child: const Icon(Icons.add),
       ),
     );
@@ -62,57 +75,66 @@ class _TodoPageState extends State<TodoPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-            "${listTodosIncompletas.length} incompletas, ${listTodosCompletas.length} completas"),
-        const SizedBox(
-          height: 10,
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 15),
+          child: Text("Atividades incompletas"),
         ),
-        const Text("Atividades incompletas"),
-        listTodosIncompletas.isEmpty
+        _controllerTodo.listTodosIncompletas.isEmpty
             ? Align(
                 alignment: Alignment.center,
                 child: Image.asset(
-                  "assets/images/todolist/lista_vazia.gif",
-                  width: size.width * .7,
-                  height: size.height * .30,
+                  "assets/images/todolist/empty.gif",
+                  width: size.width,
+                  height: size.height * .28,
                 ),
               )
             : SizedBox(
                 height: size.height * .30,
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: listTodosIncompletas.length,
-                    itemBuilder: (_, i) {
-                      var item = listTodosIncompletas[i];
-                      return Card(
-                        child: CheckboxListTile(
-                          value: item.isCheck,
-                          onChanged: (value) {
-                            setState(() {
-                              item.isCheck = !item.isCheck;
-                            });
-                          },
-                          title: Text(
-                            item.titulo,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
+                child: ListTodosWidget(
+                  listCheck: false,
+                  controller: _controllerTodo,
+                  onDismiss: (direction, i) => setState(() {
+                    var item = _controllerTodo.listTodosIncompletas[i];
+                    _controllerTodo.removerTaskIncompleta(item);
+                  }),
+                  onPress: (value, index) => setState(
+                    () {
+                      ToDo item = _controllerTodo.listTodosIncompletas[index];
+                      item.isCheck = !item.isCheck!;
+                      _controllerTodo.removerTaskIncompleta(item);
+                      _controllerTodo.addNovaTaskCompleta(item);
+                    },
+                  ),
+                ),
               ),
         const Text("Atividades completas"),
-        listTodosCompletas.isEmpty
+        _controllerTodo.listTodosCompletas.isEmpty
             ? Align(
-                alignment: Alignment.center,
+                alignment: Alignment.topCenter,
                 child: Image.asset(
-                  "assets/images/todolist/lista_vazia.gif",
-                  width: size.width * .7,
-                  height: size.height * .30,
+                  "assets/images/todolist/empty.gif",
+                  width: size.width,
+                  height: size.height * .3,
                 ),
               )
-            : const Text("Lista aqui")
+            : SizedBox(
+                height: size.height * .30,
+                child: ListTodosWidget(
+                  onDismiss: (direction, i) => setState(() {
+                    var item = _controllerTodo.listTodosCompletas[i];
+                    _controllerTodo.removerTaskCompleta(item);
+                  }),
+                  listCheck: true,
+                  controller: _controllerTodo,
+                  onPress: (value, index) {},
+                  cardColor: const Color(0xFF323232),
+                  textStyle: const TextStyle(
+                    decoration: TextDecoration.lineThrough,
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
       ],
     );
   }
@@ -126,7 +148,7 @@ class _TodoPageState extends State<TodoPage> {
             child: Image.asset(
               "assets/images/todolist/lista_vazia.gif",
               width: size.width * .8,
-              height: size.height * .4,
+              height: size.height * .5,
             ),
           ),
           const Text("Adicione uma nova atividade!"),
@@ -135,8 +157,65 @@ class _TodoPageState extends State<TodoPage> {
     );
   }
 
+  void exibirModalBottom(Size size) {
+    showModalBottomSheet<void>(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        backgroundColor: Colors.white,
+        context: context,
+        builder: (BuildContext context) {
+          return SingleChildScrollView(
+            child: SizedBox(
+              height: size.height,
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text('Adicione uma nova atividade!'),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: TextFormField(
+                          controller: _controllerTodo.tituloTarefa,
+                          decoration: const InputDecoration(
+                              label: Text("Titulo"),
+                              labelStyle: TextStyle(
+                                color: IMCCores.primary,
+                              )),
+                        ),
+                      ),
+                      SizedBox(
+                        width: size.width,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              ToDo todo = ToDo(
+                                  titulo: _controllerTodo.tituloTarefa.text);
+                              _controllerTodo.addNovaTaskIncompleta(todo);
+                              Navigator.pop(context);
+                            });
+                          },
+                          icon: const Icon(Icons.add_task_rounded),
+                          label: const Text('Salvar atividade'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
   isEmptyLists() {
-    if (listTodosCompletas.isEmpty && listTodosIncompletas.isEmpty) {
+    if (_controllerTodo.listTodosCompletas.isEmpty &&
+        _controllerTodo.listTodosIncompletas.isEmpty) {
       return true;
     }
     return false;

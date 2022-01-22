@@ -1,6 +1,6 @@
 class ToDo {
   String titulo;
-  bool isCheck;
+  bool? isCheck;
 
-  ToDo({required this.titulo, required this.isCheck});
+  ToDo({required this.titulo, this.isCheck = false});
 }
