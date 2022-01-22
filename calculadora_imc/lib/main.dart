@@ -1,9 +1,11 @@
-import 'package:calculadora_imc/src/pages/login/login_page.dart';
-import 'package:calculadora_imc/src/pages/splash/splash_page.dart';
-import 'package:calculadora_imc/src/pages/widgets/app_colors.dart';
+import 'package:calculadora_imc/src/pages/home/home_navigation.dart';
+
+import 'src/pages/login/login_page.dart';
+import 'src/pages/splash/splash_page.dart';
+import 'src/pages/widgets/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import 'src/pages/home/home_page.dart';
+import 'src/pages/home/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,13 +19,23 @@ class MyApp extends StatelessWidget {
       title: 'Calculadora IMC',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: IMCCores.primary,
+          secondaryVariant: const Color(0xFF9e9e9e),
+          error: Colors.red,
+        ),
         fontFamily: "Poppins",
         primarySwatch: IMCCores.primary,
+        toggleableActiveColor: IMCCores.primary,
+        iconTheme: const IconThemeData(color: IMCCores.primary),
+        listTileTheme: const ListTileThemeData(
+          iconColor: IMCCores.primary,
+        ),
       ),
       home: const SplashPage(),
       initialRoute: "/",
       routes: {
-        "/home": (context) => const HomePage(),
+        "/home": (context) => const HomeNavigationWidget(),
         "/login": (context) => const LoginPage(),
       },
     );
