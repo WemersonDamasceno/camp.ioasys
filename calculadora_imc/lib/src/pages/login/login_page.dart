@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'widgets/buttom_circle_widget.dart';
 import '../components/buttom_widget.dart';
-import '../todo/widgets/input_widget.dart';
+import '../components/input_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -62,9 +62,14 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             children: [
                               InputTextoWidget(
+                                onChanged: () {},
+                                prefixText: "",
                                 labelInput: "Usuario",
                                 entradaController: usuarioController,
-                                prefixIcon: Icons.person,
+                                prefixIcon: const Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                ),
                                 entradaTipo: TextInputType.emailAddress,
                                 mostrarSenha: null,
                               ),
@@ -72,9 +77,14 @@ class _LoginPageState extends State<LoginPage> {
                                 padding: EdgeInsets.symmetric(
                                     vertical: size.height * 0.02),
                                 child: InputTextoWidget(
+                                  prefixText: "",
+                                  onChanged: () {},
                                   labelInput: "Senha",
                                   entradaController: senhaController,
-                                  prefixIcon: Icons.lock,
+                                  prefixIcon: const Icon(
+                                    Icons.lock,
+                                    color: Colors.white,
+                                  ),
                                   sufixIcon: mostrarSenha
                                       ? Icons.visibility_off
                                       : Icons.visibility,

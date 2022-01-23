@@ -1,4 +1,0 @@
-#Sat Jan 22 18:36:38 BRT 2022
-base.0=C\:\\Users\\wemer\\Documents\\Projetos Pessoais\\ioasys\\calculadora_imc\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex

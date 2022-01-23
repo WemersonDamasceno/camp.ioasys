@@ -1,3 +1,5 @@
+import 'package:calculadora_imc/src/pages/conversor_moedas/pages/converson_moedas_pages.dart';
+
 import 'pages/home_page.dart';
 import '../todo/pages/todo_page.dart';
 import '../components/app_colors.dart';
@@ -16,6 +18,7 @@ class _HomeNavigationWidgetState extends State<HomeNavigationWidget> {
   static const List<Widget> listaPaginas = <Widget>[
     HomePage(),
     TodoPage(),
+    ConversorMoedasPage(),
   ];
 
   void itemSelecionado(int index) {
@@ -30,6 +33,8 @@ class _HomeNavigationWidgetState extends State<HomeNavigationWidget> {
         return "Calculadora IMC";
       case 1:
         return "Todo List";
+      case 2:
+        return "Conversor";
       default:
     }
   }
@@ -53,6 +58,13 @@ class _HomeNavigationWidgetState extends State<HomeNavigationWidget> {
               Icons.task_alt_rounded,
             ),
             label: "Todo List",
+            backgroundColor: Colors.purple,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.attach_money,
+            ),
+            label: "Conversor",
             backgroundColor: Colors.purple,
           ),
         ],

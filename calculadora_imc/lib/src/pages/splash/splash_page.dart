@@ -16,7 +16,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   void navigationPage() {
-    Navigator.popAndPushNamed(context, "/home");
+    Navigator.popAndPushNamed(context, "/login");
   }
 
   @override
