@@ -44,7 +44,7 @@ class _TodoPageState extends State<TodoPage> {
               const Padding(
                 padding: EdgeInsets.only(top: 20),
                 child: Text(
-                  "Mar 22, 2022",
+                  "Jan 22, 2022",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 24,
