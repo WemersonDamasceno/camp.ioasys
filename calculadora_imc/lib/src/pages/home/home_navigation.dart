@@ -1,4 +1,4 @@
-import 'package:calculadora_imc/src/pages/conversor_moedas/pages/converson_moedas_pages.dart';
+import 'package:calculadora_imc/src/pages/conversor_moedas/pages/conversor_pages.dart';
 
 import 'pages/home_page.dart';
 import '../todo/pages/todo_page.dart';

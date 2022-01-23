@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             children: [
                               InputTextoWidget(
-                                onChanged: () {},
+                                onChanged: (String) {},
                                 prefixText: "",
                                 labelInput: "Usuario",
                                 entradaController: usuarioController,
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                                     vertical: size.height * 0.02),
                                 child: InputTextoWidget(
                                   prefixText: "",
-                                  onChanged: () {},
+                                  onChanged: (String) {},
                                   labelInput: "Senha",
                                   entradaController: senhaController,
                                   prefixIcon: const Icon(

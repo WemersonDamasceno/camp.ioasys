@@ -10,7 +10,7 @@ class InputTextoWidget extends StatelessWidget {
   final IconData? sufixIcon;
   final Widget prefixIcon;
   final String prefixText;
-  final Function() onChanged;
+  final Function(String) onChanged;
   final GestureTapCallback? onPressIconSufix;
   final GestureTapCallback? onPressIconPrefix;
 
@@ -42,7 +42,7 @@ class InputTextoWidget extends StatelessWidget {
         fontSize: size.height * 0.02,
       ),
       keyboardType: entradaTipo,
-      onChanged: onChanged(),
+      onChanged: onChanged,
       decoration: InputDecoration(
         prefix: Text(
           prefixText,
