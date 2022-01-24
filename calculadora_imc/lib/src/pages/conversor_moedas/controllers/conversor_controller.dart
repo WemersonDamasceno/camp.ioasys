@@ -18,9 +18,11 @@ class ConversorController {
   late Results results;
 
   buscarCotacao() async {
-    results = await service.buscarCotacaoAtual();
-    dolarCotacao = results.currencies!.uSD!.buy!;
-    euroCotacao = results.currencies!.eUR!.buy!;
+    service.buscarCotacaoAtual().then((res) {
+      results = res;
+      dolarCotacao = results.currencies!.uSD!.buy!;
+      euroCotacao = results.currencies!.eUR!.buy!;
+    });
   }
 }
 
